@@ -30,8 +30,8 @@ func Error(span *otelTrace.Span, err error) {
 	(*span).SetStatus(codes.Error, err.Error())
 }
 
-// Set the status of span to OK
+// Set the status of span to OK. Since description is only added to the span if
+// status == codes.Error, description is set to empty string.
 func StatusOK(span *otelTrace.Span) {
-	// description is only included if the code is codes.Error
 	(*span).SetStatus(codes.Ok, "")
 }
