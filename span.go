@@ -23,8 +23,15 @@ func StartSpan(parentCtx context.Context, spanName string, spanOpts ...otelTrace
 	return otel.Tracer(libName, tracerOpts...).Start(parentCtx, spanName, spanOpts...)
 }
 
-// adds the error to the passed span. Should be called when a function throws an error
+// Record err as an error as an exception span event on span and set the span
+// status of span to Error. Should be called when a function throws an error.
 func Error(span *otelTrace.Span, err error) {
 	(*span).RecordError(err)
 	(*span).SetStatus(codes.Error, err.Error())
+}
+
+// Set the status of span to OK
+func StatusOK(span *otelTrace.Span) {
+	// description is only included if the code is codes.Error
+	(*span).SetStatus(codes.Ok, "")
 }
