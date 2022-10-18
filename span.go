@@ -9,8 +9,10 @@ import (
 	otelTrace "go.opentelemetry.io/otel/trace"
 )
 
-const libName = "github.com/skoved/otelutils"
-const libVer = "pre-release"
+const (
+	libName = "github.com/skoved/otelutils"
+	libVer  = "0.0.1"
+)
 
 var tracerOpts = []otelTrace.TracerOption{
 	otelTrace.WithInstrumentationVersion(libVer),
